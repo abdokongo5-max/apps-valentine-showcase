@@ -8,7 +8,7 @@
 </head>
 <body style="margin:0; background-color:#fff0f3; font-family:sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; overflow-x:hidden;">
 
-    <div id="lock" style="text-align:center; padding:25px; background:white; border-radius:20px; box-shadow:0 10px 25px rgba(255, 77, 109, 0.1); width:90%; max-width:320px; border:1px solid #ffccd5; z-index: 100;">
+    <div id="lock" style="text-align:center; padding:25px; background:white; border-radius:20px; box-shadow:0 10px 25px rgba(255,77,109,0.1); width:90%; max-width:320px; border:1px solid #ffccd5; z-index: 100;">
         <div style="font-size:50px; margin-bottom:10px;">🔒</div>
         <h2 style="color:#ff4d6d; margin:10px 0;">المنطقة دي لقلب عبده بس</h2>
         <p style="color:#666; font-size:14px; margin-bottom:20px;">اكتبي التاريخ السري بتاعنا عشان تشوفي المفاجأة 😉</p>
@@ -21,7 +21,7 @@
         <h1 style="color:#ff4d6d; font-size:26px; margin-bottom:15px;">Happy Valentine's Day ya Ash Ash ❤️</h1>
         
         <div style="background:white; padding:10px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
-            <img src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" alt="Our Photo" style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;">
+            <img src="https://images2.imgbox.com/7b/72/Lzd7P87W_o.jpg" alt="Our Photo" style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
         </div>
 
         <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05); border:1px solid #ffccd5;">
@@ -52,7 +52,6 @@
         const err = document.getElementById('err');
         const btnsContainer = document.getElementById('btns-container');
 
-        // كود الدخول
         document.getElementById('go')?.addEventListener('click', () => {
             if (passInput.value === '15112021') {
                 if(lock) lock.style.display = 'none';
@@ -62,13 +61,11 @@
             }
         });
 
-        // كود زرار Yes
         yesBtn?.addEventListener('click', () => {
             if(final) final.style.display = 'block';
             if(btnsContainer) btnsContainer.style.display = 'none';
         });
 
-        // كود هروب زرار No
         const moveNo = () => {
             if(noBtn) {
                 noBtn.style.position = 'fixed';
@@ -78,10 +75,7 @@
         };
 
         noBtn?.addEventListener('mouseover', moveNo);
-        noBtn?.addEventListener('touchstart', (e) => { 
-            e.preventDefault(); 
-            moveNo(); 
-        });
+        noBtn?.addEventListener('touchstart', (e) => { e.preventDefault(); moveNo(); });
     </script>
 </body>
 </html>
