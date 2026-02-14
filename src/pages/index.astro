@@ -21,7 +21,7 @@
         <h1 style="color:#ff4d6d; font-size:26px; margin-bottom:15px;">Happy Valentine's Day ya Ash Ash ❤️</h1>
         
         <div style="background:white; padding:10px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
-            <img src="https://images2.imgbox.com/7b/72/Lzd7P87W_o.jpg" alt="Our Photo" style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
+            <img src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" alt="Our Photo" style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;">
         </div>
 
         <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05); border:1px solid #ffccd5;">
@@ -49,15 +49,15 @@
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const final = document.getElementById('final');
-        const err = document.getElementById('err');
         const btnsContainer = document.getElementById('btns-container');
 
         document.getElementById('go')?.addEventListener('click', () => {
             if (passInput.value === '15112021') {
                 if(lock) lock.style.display = 'none';
                 if(show) show.style.display = 'block';
-            } else if(err) {
-                err.style.display = 'block';
+            } else {
+                const err = document.getElementById('err');
+                if(err) err.style.display = 'block';
             }
         });
 
