@@ -20,7 +20,7 @@
         <h1 style="color: #ff4d6d; font-size: 26px; margin-bottom: 15px;">Happy Valentine's Day ya Ash Ash ❤️</h1>
         
         <div style="background: white; padding: 10px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
-            <img src="/images/our-photo.jpg" alt="Our Photo" style="width: 100%; border-radius: 15px; display: block;">
+            <img src="./images/our-photo.jpg" alt="Our Photo" style="width: 100%; border-radius: 15px; display: block; object-fit: cover;">
         </div>
 
         <div style="background: white; padding: 20px; border-radius: 20px; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid #ffccd5;">
@@ -31,7 +31,7 @@
             </p>
             
             <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; position: relative; min-height: 60px;">
-                <button onclick="document.getElementById('final-msg').style.display='block'; this.parentElement.style.display='none';" style="padding: 12px 35px; background: #ff4d6d; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; z-index: 10;">Yes</button>
+                <button id="yesBtn" style="padding: 12px 35px; background: #ff4d6d; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; z-index: 10;">Yes</button>
                 <button id="noBtn" style="padding: 12px 35px; background: #eee; color: #888; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; transition: 0.1s; position: relative;">No</button>
             </div>
             
@@ -42,13 +42,15 @@
     </div>
 
     <script>
-        // كود تسجيل الدخول
         const btn = document.getElementById('loginBtn');
         const input = document.getElementById('pass') as HTMLInputElement;
         const lockScreen = document.getElementById('lock-screen');
         const surpriseScreen = document.getElementById('surprise-screen');
         const error = document.getElementById('err');
+        const yesBtn = document.getElementById('yesBtn');
+        const finalMsg = document.getElementById('final-msg');
 
+        // تسجيل الدخول
         btn?.addEventListener('click', () => {
             if (input?.value === '15112021') {
                 if(lockScreen) lockScreen.style.display = 'none';
@@ -58,17 +60,17 @@
             }
         });
 
-        // كود حركة زرار No الصايع
+        // زرار Yes
+        yesBtn?.addEventListener('click', () => {
+            if (finalMsg) finalMsg.style.display = 'block';
+            if (yesBtn.parentElement) yesBtn.parentElement.style.display = 'none';
+        });
+
+        // زرار No اللي بيتحرك
         const noBtn = document.getElementById('noBtn');
-        noBtn?.addEventListener('mouseover', () => {
+        const moveNo = () => {
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
             if(noBtn) {
                 noBtn.style.position = 'fixed';
-                noBtn.style.left = x + 'px';
-                noBtn.style.top = y + 'px';
-            }
-        });
-    </script>
-</body>
-</html>
+                noBtn.style.left =
