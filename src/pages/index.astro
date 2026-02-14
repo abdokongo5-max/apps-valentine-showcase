@@ -1,22 +1,30 @@
-<div id="lock" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #fff0f3; font-family: sans-serif; text-align: center; padding: 20px;">
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="🔒 Safe Area">
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #fff0f3; font-family: sans-serif; text-align: center; padding: 20px;">
     <h2 style="color: #ff4d6d;">🔒 المنطقة دي لقلب عبده بس</h2>
-    <p>اكتبي تاريخ اليوم اللي بدأ فيه كل حاجة (بدون فواصل)</p>
-    <input type="tel" id="pass" placeholder="15112021" style="padding: 12px; border: 2px solid #ff4d6d; border-radius: 8px; margin-bottom: 15px; text-align: center; width: 200px;">
-    <button onclick="go()" style="padding: 10px 25px; background: #ff4d6d; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">دخول</button>
-    <p id="err" style="color: red; display: none; margin-top: 10px;">التاريخ غلط يا توتا.. ركزي 😉</p>
-</div>
+    <p style="color: #555;">اكتبي التاريخ (بدون فواصل) عشان تشوفي المفاجأة 😉</p>
+    
+    <input type="tel" id="pass" placeholder="15112021" style="padding: 12px; border: 2px solid #ff4d6d; border-radius: 8px; margin-bottom: 15px; text-align: center; width: 220px; outline: none;">
+    
+    <button id="loginBtn" style="padding: 10px 25px; background: #ff4d6d; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">دخول</button>
+    
+    <p id="err" style="color: red; display: none; margin-top: 15px;">التاريخ غلط يا توتا.. ركزي 😉</p>
+  </div>
 
-<script>
-    function go() {
-        const p = document.getElementById('pass').value;
-        if (p === '15112021') {
-            window.location.href = '/loves/main';
-        } else {
-            document.getElementById('err').style.display = 'block';
-        }
-    }
-</script>
+  <script>
+    const btn = document.getElementById('loginBtn');
+    const input = document.getElementById('pass') as HTMLInputElement;
+    const error = document.getElementById('err');
 
-<style>
-    body { margin: 0; }
-</style>
+    btn?.addEventListener('click', () => {
+      if (input?.value === '15112021') {
+        window.location.href = '/loves/main';
+      } else if (error) {
+        error.style.display = 'block';
+      }
+    });
+  </script>
+</BaseLayout>
