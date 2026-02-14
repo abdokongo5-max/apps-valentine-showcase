@@ -11,71 +11,60 @@
     <div id="lock" style="text-align:center; padding:25px; background:white; border-radius:20px; box-shadow:0 10px 25px rgba(255,77,109,0.1); width:90%; max-width:320px; border:1px solid #ffccd5; z-index: 100;">
         <div style="font-size:50px; margin-bottom:10px;">🔒</div>
         <h2 style="color:#ff4d6d; margin:10px 0;">المنطقة دي لقلب عبده بس</h2>
-        <p style="color:#666; font-size:14px; margin-bottom:20px;">اكتبي التاريخ السري بتاعنا عشان تشوفي المفاجأة 😉</p>
-        <input type="password" id="pass" placeholder="أدخلي كلمة السر.." style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #ffccd5; border-radius:10px; text-align:center; outline:none; font-size:16px; box-sizing:border-box;">
-        <button id="go" style="width:100%; padding:12px; background:#ff4d6d; color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold; font-size:16px;">دخول</button>
-        <p id="err" style="color:#ff4d6d; display:none; margin-top:15px; font-weight:bold;">التاريخ غلط يا توتا.. ركزي 😉</p>
+        <input type="password" id="pass" placeholder="التاريخ السري.." style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #ffccd5; border-radius:10px; text-align:center; outline:none; font-size:16px;">
+        <button id="go" style="width:100%; padding:12px; background:#ff4d6d; color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold; width:100%;">دخول</button>
+        <p id="err" style="color:#ff4d6d; display:none; margin-top:15px;">التاريخ غلط يا توتا.. ركز 😉</p>
     </div>
 
     <div id="show" style="display:none; text-align:center; padding:20px; width:100%; max-width:450px;">
-        <h1 style="color:#ff4d6d; font-size:26px; margin-bottom:15px;">Happy Valentine's Day ya Ash Ash ❤️</h1>
+        <h1 style="color:#ff4d6d;">Happy Valentine's Day ❤️</h1>
         
         <div style="background:white; padding:10px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
-            <img src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" alt="Our Photo" style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;">
+            <img src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" 
+                 style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;"
+                 onload="console.log('Image Loaded')"
+                 onerror="this.src='https://i.postimg.cc/Lzd7P87W/our-photo.jpg'">
         </div>
 
-        <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05); border:1px solid #ffccd5;">
-            <p style="font-size:18px; color:#444; line-height:1.6; margin:0;">
-                حبيت حتى واحنا بعاد عن بعض لازم أفرحك بحاجة وأعرفك إنك مهما كنتي بعيدة عني قريبة من قلبي وروحي.. 
+        <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; border:1px solid #ffccd5;">
+            <p style="font-size:18px; color:#444; line-height:1.6;">
+                حبيت حتى واحنا بعاد أفرحك وأعرفك إنك دايماً في قلبي.. 
                 <br><br>
                 <span style="color:#ff4d6d; font-weight:bold; font-size:20px;">Will you be my valentine? 🥺</span>
             </p>
             
-            <div id="btns-container" style="margin-top:25px; display:flex; justify-content:center; gap:15px; min-height:60px; position: relative;">
-                <button id="yesBtn" style="padding:12px 35px; background:#ff4d6d; color:white; border:none; border-radius:10px; font-size:18px; cursor:pointer; font-weight:bold; z-index:10;">Yes</button>
-                <button id="noBtn" style="padding:12px 35px; background:#eee; color:#888; border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.1s; z-index: 5;">No</button>
+            <div id="btns-container" style="margin-top:25px; display:flex; justify-content:center; gap:15px; min-height:60px;">
+                <button id="yesBtn" style="padding:12px 35px; background:#ff4d6d; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Yes</button>
+                <button id="noBtn" style="padding:12px 35px; background:#eee; color:#888; border:none; border-radius:10px; cursor:pointer;">No</button>
             </div>
-            
-            <div id="final" style="display:none; margin-top:20px; padding:15px; background:#fff0f3; border-radius:10px; color:#ff4d6d; font-weight:bold; font-size:18px; border:1px dashed #ff4d6d;">
-                بحبك ي توتاا ي قلب عبده من جوه ❤️
-            </div>
+            <div id="final" style="display:none; margin-top:20px; color:#ff4d6d; font-weight:bold; font-size:18px;">بحبك ي توتاا ي قلب عبده من جوه ❤️</div>
         </div>
     </div>
 
     <script>
-        const passInput = document.getElementById('pass') as HTMLInputElement;
-        const lock = document.getElementById('lock');
-        const show = document.getElementById('show');
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const final = document.getElementById('final');
-        const btnsContainer = document.getElementById('btns-container');
-
-        document.getElementById('go')?.addEventListener('click', () => {
+        const goBtn = document.getElementById('go');
+        const passInput = document.getElementById('pass');
+        
+        goBtn.addEventListener('click', () => {
             if (passInput.value === '15112021') {
-                if(lock) lock.style.display = 'none';
-                if(show) show.style.display = 'block';
+                document.getElementById('lock').style.display = 'none';
+                document.getElementById('show').style.display = 'block';
             } else {
-                const err = document.getElementById('err');
-                if(err) err.style.display = 'block';
+                document.getElementById('err').style.display = 'block';
             }
         });
 
-        yesBtn?.addEventListener('click', () => {
-            if(final) final.style.display = 'block';
-            if(btnsContainer) btnsContainer.style.display = 'none';
+        document.getElementById('yesBtn').addEventListener('click', () => {
+            document.getElementById('final').style.display = 'block';
+            document.getElementById('btns-container').style.display = 'none';
         });
 
-        const moveNo = () => {
-            if(noBtn) {
-                noBtn.style.position = 'fixed';
-                noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-                noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-            }
-        };
-
-        noBtn?.addEventListener('mouseover', moveNo);
-        noBtn?.addEventListener('touchstart', (e) => { e.preventDefault(); moveNo(); });
+        const noBtn = document.getElementById('noBtn');
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * 80 + '%';
+            noBtn.style.top = Math.random() * 80 + '%';
+        });
     </script>
 </body>
 </html>
