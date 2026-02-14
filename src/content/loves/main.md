@@ -14,6 +14,6 @@ rejectionText:
   - "خلاص ماشي.. هروح أعيط في الزاوية"
   - "بصي الزرار بيكبر إزاي.. دوسي Yes بقى!"
   - "مفيش مفر.. لازم توافقي يا توتا ❤️"
-pendingImage: "./images/mocha-love-you.gif"
+pendingImage: "./images/our-photo.jpg"
 acceptedImage: "./images/milk-mocha-hug.gif"
 ---
