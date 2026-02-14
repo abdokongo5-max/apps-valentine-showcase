@@ -1,128 +1,24 @@
 ---
-import { Image } from "astro:assets";
-import { getEntry } from "astro:content";
-import BaseLayout from "@/layouts/base.astro";
-import github from "@/assets/github.svg";
-
-const { data } = await getEntry("loves", "main");
-const {
-  title,
-  openingPhrase,
-  acceptedPhrase,
-  rejectionText,
-  acceptText,
-  pendingImage,
-  acceptedImage,
-} = data;
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<script>
-  const main = document.getElementById("main") as HTMLDivElement;
+<BaseLayout title="Secret Message">
+  <div id="password-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; font-family: sans-serif; background-color: #fff0f3; padding: 20px;">
+    <h2 style="color: #ff4d6d; margin-bottom: 20px;">🔒 المنطقة دي لقلب عبده بس</h2>
+    <p style="margin-bottom: 20px; color: #555;">اكتبي التاريخ (بدون فواصل) عشان تشوفي المفاجأة 😉</p>
+    <input type="tel" id="password-input" placeholder="15112021" style="padding: 12px; border: 2px solid #ff4d6d; border-radius: 8px; margin-bottom: 15px; outline: none; text-align: center;">
+    <button onclick="checkPassword()" style="padding: 10px 25px; background-color: #ff4d6d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">دخول</button>
+    <p id="error-msg" style="color: red; margin-top: 10px; display: none;">كلمة السر غلط يا توتا.. ركزي 😉</p>
+  </div>
 
-  const headerInitial = document.getElementById(
-    "header-initial",
-  ) as HTMLDivElement;
-  const headerYes = document.getElementById("header-yes") as HTMLDivElement;
-
-  const btnGroup = document.getElementById("button-group") as HTMLDivElement;
-  const btnYes = document.getElementById("btn-yes") as HTMLButtonElement;
-  const btnNo = document.getElementById("btn-no") as HTMLButtonElement;
-
-  let currentIndex = 0;
-  const arrTextButtonNo = main.dataset.rejectionText?.split(",") ?? [];
-
-  const toggleHeader = () => {
-    headerInitial.classList.add("hidden");
-
-    headerYes.classList.remove("hidden");
-    headerYes.classList.add("flex");
-
-    btnGroup.classList.add("hidden");
-
-    currentIndex = 0;
-    btnNo.textContent =
-      arrTextButtonNo[currentIndex % arrTextButtonNo.length] ?? "";
-  };
-
-  const loopButtonText = () => {
-    currentIndex += 1;
-    btnNo.textContent =
-      arrTextButtonNo[currentIndex % arrTextButtonNo.length] ?? "";
-
-    btnYes.style.padding = `${1 + currentIndex * 0.2}rem ${
-      1 + currentIndex * 0.4
-    }rem`;
-    btnYes.style.fontSize = `${3 + currentIndex * 0.2}rem`;
-  };
-
-  btnYes.addEventListener("click", toggleHeader);
-  btnNo.addEventListener("click", loopButtonText);
-</script>
-
-<BaseLayout title={title}>
-  <main
-    class="w-full min-h-dvh flex flex-col gap-4 items-center justify-center p-4 bg-primary text-primary-mono"
-    id="main"
-    data-rejection-text={rejectionText}
-  >
-    <section
-      id="header-initial"
-      class="flex flex-col gap-4 items-center justify-center"
-    >
-      <h1 class="text-6xl font-primary text-center">{openingPhrase}</h1>
-      <Image
-        src={pendingImage}
-        alt={"Pending Image"}
-        width={480}
-        height={380}
-        class="opacity-75 pr-8 rounded-[2rem] mx-auto w-[480px] h-[380px]"
-      />
-    </section>
-
-    <section
-      id="header-yes"
-      class="flex-col gap-4 items-center justify-center hidden"
-    >
-      <h1 class="text-6xl font-primary">{acceptedPhrase}</h1>
-      <Image
-        src={acceptedImage}
-        alt="Accepted Image"
-        width={480}
-        height={380}
-        class="opacity-75 rounded-[2rem] mx-auto w-[480px] h-[380px]"
-      />
-    </section>
-
-    <section
-      id="button-group"
-      class="font-secondary flex flex-col gap-2 md:block items-center"
-    >
-      <button
-        id="btn-yes"
-        class="text-3xl py-2 px-8 rounded-xl bg-secondary hover:bg-secondary-mono transition-colors duration-300 w-fit"
-        >{acceptText}</button
-      >
-      <button
-        id="btn-no"
-        class="text-3xl py-2 px-8 rounded-xl bg-tertiary hover:bg-tertiary-mono transition-colors duration-300 w-fit"
-        >{rejectionText[0]}</button
-      >
-    </section>
-
-    <section id="footer">
-      <a
-        href="https://github.com/withered-flowers/apps-valentine-showcase"
-        class="text-primary-mono transition-colors duration-300 flex gap-2 items-center justify-center bg-secondary-mono hover:bg-tertiary-mono hover:text-black px-3 py-2 text-sm rounded-xl"
-      >
-        <Image
-          src={github}
-          alt="Github"
-          densities={[1]}
-          class="w-8 h-8 opacity-50"
-        />
-        <span class="text-black opacity-50 font-sans">Github (Source Code)</span
-        >
-      </a>
-    </section>
-  </main>
+  <script is:inline>
+    function checkPassword() {
+      const password = document.getElementById('password-input').value;
+      if (password === '15112021') { 
+        window.location.href = '/loves/main';
+      } else {
+        document.getElementById('error-msg').style.display = 'block';
+      }
+    }
+  </script>
 </BaseLayout>
