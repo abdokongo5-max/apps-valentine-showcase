@@ -13,58 +13,72 @@
         <h2 style="color:#ff4d6d; margin:10px 0;">المنطقة دي لقلب عبده بس</h2>
         <input type="password" id="pass" placeholder="التاريخ السري.." style="width:100%; padding:12px; margin-bottom:15px; border:2px solid #ffccd5; border-radius:10px; text-align:center; outline:none; font-size:16px;">
         <button id="go" style="width:100%; padding:12px; background:#ff4d6d; color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold; width:100%;">دخول</button>
-        <p id="err" style="color:#ff4d6d; display:none; margin-top:15px;">التاريخ غلط يا توتا.. ركز 😉</p>
+        <p id="err" style="color:#ff4d6d; display:none; margin-top:15px; font-weight:bold;">التاريخ غلط يا توتا.. ركزي 😉</p>
     </div>
 
     <div id="show" style="display:none; text-align:center; padding:20px; width:100%; max-width:450px;">
         <h1 style="color:#ff4d6d;">Happy Valentine's Day ❤️</h1>
         
         <div style="background:white; padding:10px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
-            <img src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" 
-                 style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;"
-                 onload="console.log('Image Loaded')"
-                 onerror="this.src='https://i.postimg.cc/Lzd7P87W/our-photo.jpg'">
+            <img id="main-img" src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" 
+                 style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;">
         </div>
 
         <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; border:1px solid #ffccd5;">
             <p style="font-size:18px; color:#444; line-height:1.6;">
-                حبيت حتى واحنا بعاد أفرحك وأعرفك إنك دايماً في قلبي.. 
+                حبيت حتى واحنا بعاد أفرحك وأعرفك إنك مهما كنتي بعيدة عني قريبة من قلبي وروحي.. 
                 <br><br>
                 <span style="color:#ff4d6d; font-weight:bold; font-size:20px;">Will you be my valentine? 🥺</span>
             </p>
             
-            <div id="btns-container" style="margin-top:25px; display:flex; justify-content:center; gap:15px; min-height:60px;">
+            <div id="btns-container" style="margin-top:25px; display:flex; justify-content:center; gap:15px; min-height:60px; position:relative;">
                 <button id="yesBtn" style="padding:12px 35px; background:#ff4d6d; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Yes</button>
                 <button id="noBtn" style="padding:12px 35px; background:#eee; color:#888; border:none; border-radius:10px; cursor:pointer;">No</button>
             </div>
-            <div id="final" style="display:none; margin-top:20px; color:#ff4d6d; font-weight:bold; font-size:18px;">بحبك ي توتاا ي قلب عبده من جوه ❤️</div>
+            <div id="final" style="display:none; margin-top:20px; color:#ff4d6d; font-weight:bold; font-size:18px; padding:10px; border:1px dashed #ff4d6d; border-radius:10px;">بحبك ي توتاا ي قلب عبده من جوه ❤️</div>
         </div>
     </div>
 
-    <script>
+    <script is:inline>
+        // استخدام is:inline بيخلي Vercel ميعملش فحص للـ TypeScript وبكده الـ Build هيعدي 100%
         const goBtn = document.getElementById('go');
         const passInput = document.getElementById('pass');
-        
-        goBtn.addEventListener('click', () => {
-            if (passInput.value === '15112021') {
-                document.getElementById('lock').style.display = 'none';
-                document.getElementById('show').style.display = 'block';
-            } else {
-                document.getElementById('err').style.display = 'block';
-            }
-        });
-
-        document.getElementById('yesBtn').addEventListener('click', () => {
-            document.getElementById('final').style.display = 'block';
-            document.getElementById('btns-container').style.display = 'none';
-        });
-
+        const lockDiv = document.getElementById('lock');
+        const showDiv = document.getElementById('show');
+        const errTag = document.getElementById('err');
+        const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        noBtn.addEventListener('mouseover', () => {
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = Math.random() * 80 + '%';
-            noBtn.style.top = Math.random() * 80 + '%';
-        });
+        const finalDiv = document.getElementById('final');
+        const btnsContainer = document.getElementById('btns-container');
+
+        if (goBtn && passInput) {
+            goBtn.addEventListener('click', () => {
+                if (passInput.value === '15112021') {
+                    if (lockDiv) lockDiv.style.display = 'none';
+                    if (showDiv) showDiv.style.display = 'block';
+                } else {
+                    if (errTag) errTag.style.display = 'block';
+                }
+            });
+        }
+
+        if (yesBtn) {
+            yesBtn.addEventListener('click', () => {
+                if (finalDiv) finalDiv.style.display = 'block';
+                if (btnsContainer) btnsContainer.style.display = 'none';
+            });
+        }
+
+        if (noBtn) {
+            const moveNo = () => {
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+                noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+                noBtn.style.zIndex = '999';
+            };
+            noBtn.addEventListener('mouseover', moveNo);
+            noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNo(); });
+        }
     </script>
 </body>
 </html>
