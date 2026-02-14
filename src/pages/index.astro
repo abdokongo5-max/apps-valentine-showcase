@@ -3,33 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔒 منطقة خاصة</title>
+    <title>Happy Valentine's Day ❤️</title>
 </head>
-<body style="margin: 0; background-color: #fff0f3; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
+<body style="margin: 0; background-color: #fff0f3; font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden;">
 
-    <div style="text-align: center; padding: 20px; border-radius: 20px; background: white; box-shadow: 0 10px 25px rgba(255, 77, 109, 0.1); border: 1px solid #ffccd5; max-width: 300px; width: 90%;">
+    <div id="lock-screen" style="text-align: center; padding: 20px; border-radius: 20px; background: white; box-shadow: 0 10px 25px rgba(255, 77, 109, 0.1); border: 1px solid #ffccd5; max-width: 320px; width: 90%;">
         <div style="font-size: 50px; margin-bottom: 10px;">🔒</div>
         <h2 style="color: #ff4d6d; margin: 10px 0;">المنطقة دي لقلب عبده بس</h2>
         <p style="color: #666; font-size: 14px; margin-bottom: 20px;">اكتبي التاريخ السري بتاعنا عشان تشوفي المفاجأة 😉</p>
-        
         <input type="password" id="pass" placeholder="أدخلي كلمة السر.." style="padding: 12px; border: 2px solid #ffccd5; border-radius: 10px; margin-bottom: 15px; text-align: center; width: 100%; box-sizing: border-box; outline: none; font-size: 16px;">
-        
         <button id="loginBtn" style="padding: 12px; background: #ff4d6d; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px;">دخول</button>
-        
         <p id="err" style="color: #ff4d6d; display: none; margin-top: 15px; font-size: 13px; font-weight: bold;">التاريخ غلط يا توتا.. ركزي 😉</p>
     </div>
 
+    <div id="surprise-screen" style="display: none; text-align: center; padding: 20px; width: 100%; max-width: 500px;">
+        <h1 style="color: #ff4d6d; font-size: 26px; margin-bottom: 15px;">Happy Valentine's Day ya Ash Ash ❤️</h1>
+        
+        <div style="background: white; padding: 10px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <img src="/images/our-photo.jpg" alt="Our Photo" style="width: 100%; border-radius: 15px; display: block;">
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 20px; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid #ffccd5;">
+            <p style="font-size: 18px; color: #444; line-height: 1.6; margin: 0;">
+                حبيت حتي واحنا بعاد عن بعض لازم افرحك بحاجة واعرفك انك مهما كنتي بعيدة عني قريبه من قلبي وروحي.. 
+                <br><br>
+                <span style="color: #ff4d6d; font-weight: bold; font-size: 20px;">Will you be my valentine? 🥺</span>
+            </p>
+            
+            <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px; position: relative; min-height: 60px;">
+                <button onclick="document.getElementById('final-msg').style.display='block'; this.parentElement.style.display='none';" style="padding: 12px 35px; background: #ff4d6d; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; z-index: 10;">Yes</button>
+                <button id="noBtn" style="padding: 12px 35px; background: #eee; color: #888; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; transition: 0.1s; position: relative;">No</button>
+            </div>
+            
+            <div id="final-msg" style="display: none; margin-top: 20px; padding: 15px; background: #fff0f3; border-radius: 10px; color: #ff4d6d; font-weight: bold; font-size: 18px; border: 1px dashed #ff4d6d;">
+                بحبك ي توتاا ي قلب عبده من جوه ❤️
+            </div>
+        </div>
+    </div>
+
     <script>
+        // كود تسجيل الدخول
         const btn = document.getElementById('loginBtn');
         const input = document.getElementById('pass') as HTMLInputElement;
+        const lockScreen = document.getElementById('lock-screen');
+        const surpriseScreen = document.getElementById('surprise-screen');
         const error = document.getElementById('err');
 
         btn?.addEventListener('click', () => {
             if (input?.value === '15112021') {
-                // جرب المسار البديل اللي القوالب دي بتستخدمه أحياناً
-                window.location.href = './loves/main';
+                if(lockScreen) lockScreen.style.display = 'none';
+                if(surpriseScreen) surpriseScreen.style.display = 'block';
             } else if (error) {
                 error.style.display = 'block';
+            }
+        });
+
+        // كود حركة زرار No الصايع
+        const noBtn = document.getElementById('noBtn');
+        noBtn?.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            if(noBtn) {
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
             }
         });
     </script>
