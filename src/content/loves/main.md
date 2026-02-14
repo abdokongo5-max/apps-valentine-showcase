@@ -1,43 +1,19 @@
 ---
-# title: string
-# Will be used for HTML Title
-title: "My Valentine"
-
-# openingPhrase: string
-# Will be used for opening phrase (header on main page)
-openingPhrase: "Will you be my valentine?"
-
-# acceptedPhrase: string
-# Will be used for accepted phrase (header on main page, when yes is pressed)
-acceptedPhrase: "Yay, Love you too - xoxo"
-
-# rejectionText: array of string
-# Will be used for changing text when Right button (No) is pressed
+title: "Happy valentines day ya ash ash ❤️"
+openingPhrase: "حبيت حتي واحنا بعاد عن بعض لازم افرحك بحاجة واعرفك انك مهما كنتي بعيدة عني قريبه من قلبي وروحي.. Will you be my valentine? 🥺"
+acceptedPhrase: "بحبك ي توتاا ي قلب عبده من جوه ❤️"
+acceptText: "Yes"
 rejectionText:
   - "No"
-  - "You sure?"
-  - "Really sure?"
-  - "Positive??"
-  - "Pwetty pwease?"
-  - "Think about it?"
-  - "If you say no I'll be sad T_T"
-  - "So sad ..."
-  - "So so so sad..."
-  - "Ok fine I'll stop asking"
-  - "Just kidding PLEASE SAY YES"
-  - "You break my heart..."
-
-# acceptText: string
-# Will be used for Left Button text
-acceptText: "Yes"
-
-# pendingImage: Image
-# Will be used for first shown image
-# Image MUST be inside `src/content/loves`
-pendingImage: "./images/mocha-love-you.gif"
-
-# acceptedImage: Image
-# Will be used when Left button (Yes) is pressed
-# Image MUST be inside `src/content/loves`
+  - "ههون عليكي ي قلب عبده؟ 🥺"
+  - "طب فكري تاني كدة.."
+  - "المسافات هتخليكي تقولي لأ؟"
+  - "ده أنا عبده حبيبك برضه!"
+  - "طب والله قلبي اتكسر حتت T_T"
+  - "طب والبيتزا اللي كنا هنأكلها سوا؟"
+  - "خلاص ماشي.. هروح أعيط في الزاوية"
+  - "بصي الزرار بيكبر إزاي.. دوسي Yes بقى!"
+  - "مفيش مفر.. لازم توافقي يا توتا ❤️"
+pendingImage: "https://i.ibb.co/x8GjPFm7/your-image.jpg"
 acceptedImage: "./images/milk-mocha-hug.gif"
 ---
