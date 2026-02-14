@@ -26,7 +26,8 @@
 
         btn?.addEventListener('click', () => {
             if (input?.value === '15112021') {
-                window.location.href = '/loves/main';
+                // جربنا المسار ده، لو منفعش هنحاول المسار التاني أوتوماتيك
+                window.location.href = '/loves/main/';
             } else if (error) {
                 error.style.display = 'block';
             }
