@@ -10,7 +10,6 @@
         body, html {
             margin: 0; padding: 0; width: 100%; min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* خلفية رومانسية متدرجة مع قلوب خفيفة */
             background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
             overflow-x: hidden;
         }
@@ -20,7 +19,6 @@
             justify-content: center; min-height: 100vh; padding: 20px;
         }
 
-        /* القلوب اللي بتطير */
         .heart-float {
             position: fixed; bottom: -20px; font-size: 20px; color: #ff4d6d;
             user-select: none; pointer-events: none; animation: float 5s linear forwards; z-index: 1;
@@ -51,15 +49,26 @@
             border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
 
-        /* إخفاء الألبوم تماماً في البداية */
         #album { display: none; width: 100%; max-width: 450px; }
+
+        /* زرار الموسيقى العايم */
+        #musicBtn {
+            position: fixed; bottom: 20px; right: 20px;
+            background: white; border: 2px solid #ff4d6d;
+            border-radius: 50%; width: 50px; height: 50px;
+            font-size: 24px; display: none; align-items: center;
+            justify-content: center; box-shadow: 0 5px 15px rgba(255,77,109,0.3);
+            z-index: 9999; cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="https://files.catbox.moe/860vum.mp3" type="audio/mpeg">
     </audio>
+
+    <div id="musicBtn">🔇</div>
 
     <div id="main-container">
         <div id="lock" class="card">
@@ -76,25 +85,25 @@
 
             <div class="card">
                 <img src="https://i.postimg.cc/pL4dZL4M/our-photo.jpg" class="photo-frame">
-                <p style="color:#444;">كل لحظة معاكي هي بداية لحكاية حب جديدة.. ❤️</p>
+                <p style="color:#444; font-weight:bold;">كل لحظة معاكي هي بداية لحكاية حب جديدة.. ❤️</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/6pgQ0pgX/our-photo.jpg" class="photo-frame">
-                <p style="color:#444;">ضحكتك هي اللي بتنور أيامي الصعبة.. 😍</p>
+                <p style="color:#444; font-weight:bold;">ضحكتك هي اللي بتنور أيامي الصعبة.. 😍</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/wjZBVjPZ/our-photo-2.jpg" class="photo-frame">
-                <p style="color:#444;">أجمل صدفة في حياتي هي اليوم اللي عرفتك فيه.. ✨</p>
+                <p style="color:#444; font-weight:bold;">أجمل صدفة في حياتي هي اليوم اللي عرفتك فيه.. ✨</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/6pgQ0pgK/Screenshot-20260215-061957-Contacts.jpg" class="photo-frame">
-                <p style="color:#444;">يا رب نفضل سوا طول العمر وما يفرقنا شيء.. 💍</p>
+                <p style="color:#444; font-weight:bold;">يا رب نفضل سوا طول العمر وما يفرقنا شيء.. 💍</p>
             </div>
 
-            <div class="card" style="margin-bottom: 50px;">
+            <div class="card" style="margin-bottom: 80px;">
                 <h3 style="color:#ff4d6d;">Will you be my valentine? 🥺</h3>
                 <div style="display:flex; justify-content:center; gap:20px;">
                     <button id="yesBtn" style="flex:1;">Yes 😍</button>
@@ -103,6 +112,86 @@
                 <div id="final" style="display:none; margin-top:20px; color:#ff4d6d; font-weight:bold; border:2px dashed #ff4d6d; padding:15px; border-radius:15px;">
                     بحبك ي توتاا ي قلب عبده من جوه ❤️💍
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
+        function playAudio() {
+            music.play().then(() => {
+                isPlaying = true;
+                musicBtn.innerHTML = '🎵';
+            }).catch(err => console.log("المتصفح منع التشغيل، مستني تفاعل من المستخدم."));
+        }
+
+        musicBtn.onclick = function() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = '🔇';
+                isPlaying = false;
+            } else {
+                playAudio();
+            }
+        };
+
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart-float';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 400);
+        }
+
+        document.getElementById('go').onclick = function() {
+            const pass = document.getElementById('pass').value.trim();
+            if (pass === '15112021') {
+                document.getElementById('lock').style.display = 'none';
+                document.getElementById('album').style.display = 'block';
+                document.getElementById('main-container').style.justifyContent = 'flex-start';
+                musicBtn.style.display = 'flex'; // إظهار زرار الموسيقى
+                
+                playAudio(); // محاولة التشغيل فوراً
+                startHearts();
+
+                // لو المتصفح رخم ومشتغلتش، أي لمسة على الشاشة هتشغلها
+                document.body.addEventListener('touchstart', function() {
+                    if (!isPlaying) playAudio();
+                }, { once: true });
+                document.body.addEventListener('click', function() {
+                    if (!isPlaying) playAudio();
+                }, { once: true });
+
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        };
+
+        document.getElementById('yesBtn').onclick = function() {
+            document.getElementById('final').style.display = 'block';
+            if (!isPlaying) playAudio();
+        };
+
+        const noBtn = document.getElementById('noBtn');
+        const moveNo = (e) => {
+            if (e) e.preventDefault();
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * 70 + 'vw';
+            noBtn.style.top = Math.random() * 70 + 'vh';
+            noBtn.style.zIndex = '9999';
+        };
+        noBtn.onmouseover = moveNo;
+        noBtn.ontouchstart = moveNo;
+    </script>
+</body>
+</html>                </div>
             </div>
         </div>
     </div>
