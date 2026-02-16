@@ -3,39 +3,56 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Valentine's Day My Love ❤️</title>
     <style>
+        * { box-sizing: border-box; }
         body, html {
-            margin: 0; padding: 0;
-            background: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            scroll-behavior: smooth;
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* خلفية رومانسية متدرجة مع قلوب خفيفة */
+            background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
+            overflow-x: hidden;
         }
+        
         #main-container {
-            display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px;
+            display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; min-height: 100vh; padding: 20px;
         }
+
+        /* القلوب اللي بتطير */
+        .heart-float {
+            position: fixed; bottom: -20px; font-size: 20px; color: #ff4d6d;
+            user-select: none; pointer-events: none; animation: float 5s linear forwards; z-index: 1;
+        }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 20px; border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.15);
-            width: 90%; max-width: 450px; text-align: center;
-            margin-bottom: 30px; border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 25px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            width: 100%; max-width: 400px; text-align: center;
+            border: 2px solid #ffccd5; z-index: 10; margin-bottom: 20px;
         }
+
         .photo-frame {
-            width: 100%; border-radius: 20px; border: 5px solid white;
+            width: 100%; border-radius: 20px; border: 4px solid white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px;
         }
-        .heart {
-            position: fixed; bottom: -20px; font-size: 20px; color: #ff4d6d;
-            animation: float 5s linear forwards; z-index: 50;
+
+        input {
+            width: 100%; padding: 14px; margin: 15px 0; border: 2px solid #ffccd5;
+            border-radius: 12px; text-align: center; font-size: 16px; outline: none;
         }
-        @keyframes float { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #ffccd5; margin: 15px 0; outline: none; text-align: center; }
-        button { background: #ff4d6d; color: white; border: none; padding: 15px 30px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; }
-        #noBtn { background: #eee; color: #888; width: auto; position: relative; }
-        .hidden { display: none; }
+
+        button {
+            background: #ff4d6d; color: white; border: none; padding: 12px 25px;
+            border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+
+        /* إخفاء الألبوم تماماً في البداية */
+        #album { display: none; width: 100%; max-width: 450px; }
     </style>
 </head>
 <body>
@@ -45,46 +62,45 @@
     </audio>
 
     <div id="main-container">
-        
         <div id="lock" class="card">
-            <div style="font-size:50px;">🔒</div>
+            <div style="font-size:60px; margin-bottom:10px;">🔒</div>
             <h2 style="color:#ff4d6d;">جاهزة للمفاجأة؟</h2>
-            <p>اكتبي تاريخ احسن يوم في عمري 😉</p>
-            <input type="text" id="pass" placeholder="أدخلي التاريخ هنا..">
-            <button id="go">افتحي قلبي ❤️</button>
-            <p id="err" class="hidden" style="color:#ff4d6d; font-weight:bold; margin-top:10px;">التاريخ غلط يا توتا.. ركزي 🥺</p>
+            <p style="color:#666;">اكتبي تاريخ احسن يوم في عمري 😉</p>
+            <input type="text" id="pass" placeholder="أدخلي التاريخ هنا.." autocomplete="off">
+            <button id="go" style="width:100%;">افتحي قلبي ❤️</button>
+            <p id="err" style="color:#ff4d6d; display:none; margin-top:15px; font-weight:bold;">التاريخ غلط يا توتا.. ركزي 🥺</p>
         </div>
 
-        <div id="album" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <h1 style="color:#ff4d6d; text-align:center;">Happy Valentine's Day ❤️</h1>
+        <div id="album">
+            <h1 style="color:#ff4d6d; text-align:center; text-shadow: 1px 1px 2px white;">Happy Valentine's Day ❤️</h1>
 
             <div class="card">
                 <img src="https://i.postimg.cc/pL4dZL4M/our-photo.jpg" class="photo-frame">
-                <p style="color:#444; font-weight:bold;">كل لحظة معاكي هي بداية لحكاية حب جديدة.. ❤️</p>
+                <p style="color:#444;">كل لحظة معاكي هي بداية لحكاية حب جديدة.. ❤️</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/6pgQ0pgX/our-photo.jpg" class="photo-frame">
-                <p style="color:#444; font-weight:bold;">ضحكتك هي اللي بتنور أيامي الصعبة.. 😍</p>
+                <p style="color:#444;">ضحكتك هي اللي بتنور أيامي الصعبة.. 😍</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/wjZBVjPZ/our-photo-2.jpg" class="photo-frame">
-                <p style="color:#444; font-weight:bold;">أجمل صدفة في حياتي هي اليوم اللي عرفتك فيه.. ✨</p>
+                <p style="color:#444;">أجمل صدفة في حياتي هي اليوم اللي عرفتك فيه.. ✨</p>
             </div>
 
             <div class="card">
                 <img src="https://i.postimg.cc/6pgQ0pgK/Screenshot-20260215-061957-Contacts.jpg" class="photo-frame">
-                <p style="color:#444; font-weight:bold;">يا رب نفضل سوا طول العمر وما يفرقنا شيء.. 💍</p>
+                <p style="color:#444;">يا رب نفضل سوا طول العمر وما يفرقنا شيء.. 💍</p>
             </div>
 
-            <div class="card">
+            <div class="card" style="margin-bottom: 50px;">
                 <h3 style="color:#ff4d6d;">Will you be my valentine? 🥺</h3>
                 <div style="display:flex; justify-content:center; gap:20px;">
-                    <button id="yesBtn" style="width:auto;">Yes 😍</button>
-                    <button id="noBtn">No 😢</button>
+                    <button id="yesBtn" style="flex:1;">Yes 😍</button>
+                    <button id="noBtn" style="background:#eee; color:#888; flex:1;">No 😢</button>
                 </div>
-                <div id="final" class="hidden" style="margin-top:20px; color:#ff4d6d; font-weight:bold; border:2px dashed #ff4d6d; padding:15px; border-radius:15px;">
+                <div id="final" style="display:none; margin-top:20px; color:#ff4d6d; font-weight:bold; border:2px dashed #ff4d6d; padding:15px; border-radius:15px;">
                     بحبك ي توتاا ي قلب عبده من جوه ❤️💍
                 </div>
             </div>
@@ -93,44 +109,50 @@
 
     <script is:inline>
         const music = document.getElementById('bgMusic');
-        
-        document.getElementById('go').onclick = function() {
+        const goBtn = document.getElementById('go');
+
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart-float';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 400);
+        }
+
+        goBtn.onclick = function() {
             const pass = document.getElementById('pass').value.trim();
             if (pass === '15112021') {
-                // تفعيل الأغنية فوراً
+                // تفعيل الموسيقى
                 music.play().catch(() => {
-                    // محاولة بديلة لو المتصفح رفض
-                    window.addEventListener('click', () => music.play(), {once: true});
+                    // إذا منع المتصفح، ستعمل عند أول لمسة
+                    document.body.addEventListener('click', () => music.play(), {once: true});
                 });
 
-                document.getElementById('lock').classList.add('hidden');
-                document.getElementById('album').classList.remove('hidden');
-                document.body.style.overflow = 'auto'; // السماح بالسكورول للألبوم
-                
-                // بدء القلوب
-                setInterval(() => {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '❤️'; heart.className = 'heart';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 5000);
-                }, 400);
+                document.getElementById('lock').style.display = 'none';
+                document.getElementById('album').style.display = 'block';
+                document.getElementById('main-container').style.justifyContent = 'flex-start';
+                startHearts();
             } else {
-                document.getElementById('err').classList.remove('hidden');
+                document.getElementById('err').style.display = 'block';
             }
         };
 
         document.getElementById('yesBtn').onclick = function() {
-            document.getElementById('final').classList.remove('hidden');
+            document.getElementById('final').style.display = 'block';
             music.play();
         };
 
         const noBtn = document.getElementById('noBtn');
-        const moveNo = () => {
+        const moveNo = (e) => {
+            if (e) e.preventDefault();
             noBtn.style.position = 'fixed';
-            noBtn.style.left = Math.random() * 80 + 'vw';
-            noBtn.style.top = Math.random() * 80 + 'vh';
+            noBtn.style.left = Math.random() * 70 + 'vw';
+            noBtn.style.top = Math.random() * 70 + 'vh';
+            noBtn.style.zIndex = '9999';
         };
         noBtn.onmouseover = moveNo;
         noBtn.ontouchstart = moveNo;
