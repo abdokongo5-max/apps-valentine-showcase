@@ -20,13 +20,13 @@
         <h1 style="color:#ff4d6d;">Happy Valentine's Day ❤️</h1>
         
         <div style="background:white; padding:10px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
-            <img id="main-img" src="https://i.ibb.co/Lzd7P87W/our-photo.jpg" 
+            <img id="main-img" src="https://i.postimg.cc/LhFp1cws/our-photo-1.jpg" 
                  style="width:100%; border-radius:15px; display:block; max-height:450px; object-fit:cover;">
         </div>
 
         <div style="background:white; padding:20px; border-radius:20px; margin-top:20px; border:1px solid #ffccd5;">
             <p style="font-size:18px; color:#444; line-height:1.6;">
-                حبيت حتى واحنا بعاد أفرحك وأعرفك إنك مهما كنتي بعيدة عني قريبة من قلبي وروحي.. 
+                حبيت حتى واحنا بعاد عن بعض لازم أفرحك بحاجة وأعرفك إنك مهما كنتي بعيدة عني قريبة من قلبي وروحي.. 
                 <br><br>
                 <span style="color:#ff4d6d; font-weight:bold; font-size:20px;">Will you be my valentine? 🥺</span>
             </p>
@@ -40,7 +40,6 @@
     </div>
 
     <script is:inline>
-        // استخدام is:inline بيخلي Vercel ميعملش فحص للـ TypeScript وبكده الـ Build هيعدي 100%
         const goBtn = document.getElementById('go');
         const passInput = document.getElementById('pass');
         const lockDiv = document.getElementById('lock');
@@ -52,21 +51,21 @@
         const btnsContainer = document.getElementById('btns-container');
 
         if (goBtn && passInput) {
-            goBtn.addEventListener('click', () => {
+            goBtn.onclick = function() {
                 if (passInput.value === '15112021') {
                     if (lockDiv) lockDiv.style.display = 'none';
                     if (showDiv) showDiv.style.display = 'block';
                 } else {
                     if (errTag) errTag.style.display = 'block';
                 }
-            });
+            };
         }
 
         if (yesBtn) {
-            yesBtn.addEventListener('click', () => {
+            yesBtn.onclick = function() {
                 if (finalDiv) finalDiv.style.display = 'block';
                 if (btnsContainer) btnsContainer.style.display = 'none';
-            });
+            };
         }
 
         if (noBtn) {
@@ -76,8 +75,8 @@
                 noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
                 noBtn.style.zIndex = '999';
             };
-            noBtn.addEventListener('mouseover', moveNo);
-            noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNo(); });
+            noBtn.onmouseover = moveNo;
+            noBtn.ontouchstart = (e) => { e.preventDefault(); moveNo(); };
         }
     </script>
 </body>
