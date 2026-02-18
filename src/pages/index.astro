@@ -6,27 +6,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0d0221">
+    
     <title>إلى أشرقت ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --main-purple: #ff00ff; --dark-bg: #0d0221; --card-bg: #1a1a2e; }
-        body { background-color: var(--dark-bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+        body { background-color: var(--dark-bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        #login-screen { text-align: center; width: 90%; max-width: 350px; background: var(--card-bg); padding: 40px 30px; border-radius: 35px; box-shadow: 0 0 30px rgba(255, 0, 255, 0.2); position: relative; z-index: 10; }
+        /* شاشة الدخول */
+        #login-screen { text-align: center; width: 90%; max-width: 350px; background: var(--card-bg); padding: 40px 30px; border-radius: 35px; box-shadow: 0 0 30px rgba(255, 0, 255, 0.2); position: relative; z-index: 100; }
         .input-box { width: 100%; padding: 15px; margin: 20px 0; border-radius: 50px; border: 2px solid var(--main-purple); background: transparent; color: #fff; text-align: center; font-size: 1.1rem; outline: none; box-sizing: border-box; }
-        .login-btn { width: 100%; padding: 15px; border-radius: 50px; border: none; background: linear-gradient(90deg, #ff00ff, #8a2be2); color: #fff; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 0, 255, 0.4); }
+        .login-btn { width: 100%; padding: 15px; border-radius: 50px; border: none; background: linear-gradient(90deg, #ff00ff, #8a2be2); color: #fff; font-weight: bold; cursor: pointer; width: 100%; }
 
-        #main-content { display: none; text-align: center; width: 90%; max-width: 500px; animation: fadeIn 1.5s ease-in; }
+        /* المحتوى الرئيسي */
+        #main-content { display: none; text-align: center; width: 95%; max-width: 500px; padding: 20px 0; animation: fadeIn 1.5s ease-in; z-index: 10; }
+        
+        /* العداد */
+        .counter-section { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 0, 255, 0.2); }
+        .counter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; direction: ltr; margin-top: 10px; }
+        .counter-box { background: var(--card-bg); padding: 10px 5px; border-radius: 12px; }
+        .counter-box span { display: block; font-size: 1.2rem; font-weight: bold; color: var(--main-purple); }
+        .counter-box p { margin: 2px 0 0; font-size: 0.7rem; color: #b3b3b3; }
+
+        /* السلايدر */
         .slider { position: relative; width: 100%; height: 350px; border-radius: 25px; overflow: hidden; border: 3px solid var(--main-purple); box-shadow: 0 0 25px var(--main-purple); margin-bottom: 25px; }
-        .slider img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slider img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; top: 0; left: 0; }
         .slider img.active { opacity: 1; }
 
+        /* الفيديو */
         .video-container { width: 100%; max-width: 315px; margin: 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 0 15px rgba(255,0,255,0.3); }
         iframe { width: 100%; height: 560px; border: none; }
 
-        h1 { color: var(--main-purple); text-shadow: 0 0 10px var(--main-purple); }
-        p { font-size: 1.2rem; line-height: 1.6; }
-
+        /* القلوب المتساقطة */
+        .heart { position: fixed; color: #ff00ff; font-size: 20px; user-select: none; z-index: 1; top: -10%; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) translateX(20px) rotate(360deg); opacity: 0; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -34,14 +50,27 @@
 
     <div id="login-screen">
         <h1>عيد الحب 💕</h1>
-        <p style="color: #b3b3b3;">جاهزة يا روحي؟ 💞</p>
-        <input type="password" id="passInput" class="input-box" placeholder="اكتبي تاريخنا يا بطوطتي 😊❤️">
-        <button id="submitBtn" class="login-btn">ادخلي يا نور عيني 💜</button>
+        <p style="color: #b3b3b3;">وحشتيني يا أشرقت 💞</p>
+        <input type="password" id="passInput" class="input-box" placeholder="تاريخنا يا روحي (يوم شهر سنة)">
+        <button id="submitBtn" class="login-btn">ادخلي لقلبي 💜</button>
     </div>
 
     <div id="main-content">
         <h1>أشرقت.. ❤️</h1>
-        <div class="slider" id="slider">
+        
+        <div class="counter-section">
+            <p style="margin:0; font-size: 0.9rem;">إحنا مع بعض بقالنا:</p>
+            <div class="counter-grid" id="timer">
+                <div class="counter-box"><span id="years">0</span><p>سنين</p></div>
+                <div class="counter-box"><span id="months">0</span><p>شهور</p></div>
+                <div class="counter-box"><span id="days">0</span><p>أيام</p></div>
+                <div class="counter-box"><span id="hours">0</span><p>ساعات</p></div>
+                <div class="counter-box"><span id="minutes">0</span><p>دقائق</p></div>
+                <div class="counter-box"><span id="seconds">0</span><p>ثواني</p></div>
+            </div>
+        </div>
+
+        <div class="slider">
             <img src="/1.jpg" class="active">
             <img src="/2.jpg">
             <img src="/3.jpg">
@@ -52,10 +81,28 @@
             <iframe id="video" src="https://www.youtube.com/embed/n7Tmcj8E6qQ" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
 
-        <p>أشرقت يعني قلبي وروحي وعقلي.. <br> كل سنة وإنتي معايا يا أجمل حاجة في دنيتي ❤️</p>
+        <p style="padding: 20px; line-height: 1.8;">
+            أشرقت يعني قلبي وروحي وعقلي.. <br> 
+            أنا ممتن لكل ثانية عشتها معاكي من يوم 15/11/2021 لحد النهاردة.. <br>
+            كل سنة وإنتي معايا يا أجمل حاجة في حياتي ❤️
+        </p>
     </div>
 
     <script is:inline>
+        // 1. العداد التنازلي
+        function updateCounter() {
+            const startDate = new Date("2021-11-15T00:00:00");
+            const now = new Date();
+            const diff = now - startDate;
+            document.getElementById("years").innerText = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+            document.getElementById("months").innerText = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+            document.getElementById("days").innerText = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+
+        // 2. السلايدر
         let currentSlide = 0;
         function startSlider() {
             const images = document.querySelectorAll('.slider img');
@@ -66,8 +113,6 @@
             }, 3000);
         }
 
-        function checkPassword() {
-            const input = document.getElementById('passInput');
-            if (input && input.value === "15112021") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = '
+        // 3. القلوب المتساقطة
+        function createHeart() {
+            const heart = document.
