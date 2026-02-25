@@ -100,6 +100,8 @@
         <div class="photo-entry"><div class="photo-frame"><img src="/2.jpg"></div><p>بحبكك يا قلب عبده 😍</p></div>
         <div class="photo-entry"><div class="photo-frame"><img src="/3.jpg"></div><p>بعشق امكك 😉💜</p></div>
         <div class="photo-entry"><div class="photo-frame"><img src="/4.jpg"></div><p>لو رجع بيا الزمن ألف مرة هختارك إنتي ❤️</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/5.jpg"></div><p>يا ضحكة بتنور دنيتي ✨</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/6.jpg"></div><p>دايماً في قلبي وبالي ♾️</p></div>
     </div>
 
     <script is:inline>
@@ -108,7 +110,7 @@
             heart.innerHTML = '❤️';
             heart.style.position = 'fixed';
             heart.style.top = '-10vh';
-            heart.style.left = Math.random() * 95 + 'vw'; /* قللنا النسبة لـ 95 عشان ميخرجش برا الشاشة */
+            heart.style.left = Math.random() * 95 + 'vw';
             heart.style.color = 'white';
             heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
             heart.style.zIndex = '1';
@@ -138,7 +140,7 @@
             if (pass === "15112021") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                document.body.style.display = 'block'; /* تغيير الـ flex عشان التمرير يشتغل صح */
+                document.body.style.display = 'block';
                 const iframe = document.getElementById('youtube-audio');
                 iframe.src += "&autoplay=1";
                 setInterval(updateCounter, 1000);
