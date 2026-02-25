@@ -6,67 +6,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0d0221">
     <title>إلى أشرقت ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --main-purple: #ff00ff; --dark-bg: #0d0221; --card-bg: #1a1a2e; }
-        body { background-color: var(--dark-bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        :root { 
+            --main-purple: #ff00ff; 
+            --dark-bg: #0d0221; 
+            --card-bg: #1a1a2e; 
+        }
         
-        /* نجوم الخلفية */
-        #stars-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        body { 
+            background-color: var(--dark-bg); 
+            color: white; 
+            font-family: 'Cairo', sans-serif; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            position: relative;
+        }
 
-        #login-screen { text-align: center; width: 90%; max-width: 350px; background: var(--card-bg); padding: 40px 30px; border-radius: 35px; box-shadow: 0 0 30px rgba(255, 0, 255, 0.2); position: fixed; z-index: 100; }
-        .input-box { width: 100%; padding: 15px; margin: 20px 0; border-radius: 50px; border: 2px solid var(--main-purple); background: transparent; color: #fff; text-align: center; font-size: 1.1rem; outline: none; box-sizing: border-box; }
-        .login-btn { width: 100%; padding: 15px; border-radius: 50px; border: none; background: linear-gradient(90deg, #ff00ff, #8a2be2); color: #fff; font-weight: bold; cursor: pointer; }
+        /* شاشة الدخول */
+        #login-screen { 
+            text-align: center; 
+            width: 85%; 
+            max-width: 380px; 
+            background: rgba(26, 26, 46, 0.9); 
+            backdrop-filter: blur(10px);
+            padding: 40px 25px; 
+            border-radius: 35px; 
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.2); 
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            z-index: 100;
+        }
 
-        #main-content { display: none; width: 95%; max-width: 600px; text-align: center; padding: 40px 0; animation: fadeIn 1.5s ease-in; position: relative; z-index: 1; }
-        
+        /* المحتوى الرئيسي */
+        #main-content {
+            display: none;
+            width: 90%;
+            max-width: 550px;
+            text-align: center;
+            z-index: 10;
+            padding: 40px 0;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .love-letter {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 25px;
+            border: 1px solid var(--main-purple);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
         .counter-section { margin-bottom: 40px; }
-        .counter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; direction: ltr; margin-top: 20px; }
-        .counter-box { background: var(--card-bg); padding: 15px 5px; border-radius: 15px; border: 1px solid rgba(255, 0, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .counter-box span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--main-purple); }
-        .counter-box p { margin: 5px 0 0; font-size: 0.75rem; color: #b3b3b3; }
+        .counter-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; 
+            direction: ltr; 
+        }
+        .counter-box { 
+            background: var(--card-bg); 
+            padding: 12px 5px; 
+            border-radius: 15px; 
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        .counter-box span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--main-purple); }
+        .counter-box p { margin: 2px 0 0; font-size: 0.75rem; color: #b3b3b3; }
 
-        .photo-entry { margin-bottom: 50px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.1); }
-        .photo-frame { width: 100%; border-radius: 20px; overflow: hidden; border: 2px solid var(--main-purple); box-shadow: 0 0 15px var(--main-purple); }
+        .photo-entry {
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 0, 255, 0.1);
+        }
+        .photo-frame {
+            width: 100%; border-radius: 20px; overflow: hidden; 
+            border: 2px solid var(--main-purple); box-shadow: 0 0 15px var(--main-purple);
+        }
         .photo-frame img { width: 100%; display: block; }
-        .photo-caption { margin-top: 20px; font-size: 1.3rem; font-weight: bold; text-shadow: 0 0 10px var(--main-purple); }
-        
-        .video-container { width: 100%; max-width: 315px; margin: 40px auto; border-radius: 25px; overflow: hidden; box-shadow: 0 0 20px rgba(255,0,255,0.4); }
-        iframe { width: 100%; height: 560px; border: none; }
+        .photo-caption { margin-top: 15px; font-size: 1.2rem; font-weight: bold; text-shadow: 0 0 10px var(--main-purple); }
 
-        /* ستايل زرار السعادة والجواب */
-        .happiness-btn { background: #fff; color: #ff00ff; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(255,0,255,0.3); }
-        #love-message { height: 30px; font-weight: bold; color: #ff00ff; margin-bottom: 20px; text-shadow: 0 0 5px white; }
-        .letter-btn { background: none; border: 1px solid #ff00ff; color: #fff; padding: 8px 20px; border-radius: 20px; cursor: pointer; margin: 20px 0; }
-        .letter-content { display: none; background: rgba(255,255,255,0.9); color: #333; padding: 20px; border-radius: 15px; margin: 15px auto; width: 80%; line-height: 1.6; }
-        
-        .heart-fly { position: fixed; pointer-events: none; animation: fly 1s linear forwards; z-index: 1000; }
-        @keyframes fly { to { transform: translateY(-100px); opacity: 0; } }
+        .input-box { 
+            width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 50px; 
+            border: 2px solid var(--main-purple); background: transparent; 
+            color: #fff; text-align: center; outline: none; box-sizing: border-box;
+        }
+
+        .login-btn { 
+            width: 100%; padding: 15px; border-radius: 50px; border: none; 
+            background: linear-gradient(45deg, #ff00ff, #8a2be2); 
+            color: #fff; font-weight: bold; cursor: pointer;
+        }
+
+        .falling-heart {
+            position: fixed; top: -10%; font-size: 14px; color: var(--main-purple);
+            user-select: none; z-index: 1; animation: fall linear forwards;
+        }
+
+        /* إخفاء مشغل اليوتيوب */
+        #music-player { 
+            position: absolute; 
+            width: 0; 
+            height: 0; 
+            overflow: hidden; 
+            z-index: -1; 
+        }
+
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <canvas id="stars-canvas"></canvas>
 
     <div id="login-screen">
-        <h1>عيد الحب 💕</h1>
-        <p style="color: #b3b3b3;">جاهزة يا روحي؟ 💞</p>
-        <input type="password" id="passInput" class="input-box" placeholder="اكتبي تاريخنا يا بطوطتي 😊❤️">
-        <button id="submitBtn" class="login-btn">ادخلي يا نور عيني 💜</button>
+        <h1>وحشتيني يا نور عيني ❤️</h1>
+        <p>اكتبي تاريخنا يلا 😉💞</p>
+        <input type="tel" id="passInput" class="input-box" placeholder="15112021">
+        <button id="submitBtn" class="login-btn">ادخلي لقلبي 🔓</button>
     </div>
 
     <div id="main-content">
-        <h1 style="margin-bottom: 10px;">أشرقت.. ❤️</h1>
-        
-        <button class="happiness-btn" id="happyBtn">دوس هنا لو وحشتك 😉</button>
-        <div id="love-message"></div>
+        <div id="music-player">
+            <iframe id="youtube-audio" 
+                    src="https://www.youtube.com/embed/XRUNVFhmD0o?enablejsapi=1&loop=1&playlist=XRUNVFhmD0o" 
+                    allow="autoplay; encrypted-media"></iframe>
+        </div>
+
+        <div class="love-letter">
+            وحشتيني ي آش آش ❤️<br>
+            وحشني صوتك وكلامك وضحكتك وهزارك حتي خناقك وحشني وحشتني كل حاجة فيكي عدا وقت كتير وكبير واحنا مش مع بعض بس انتي معايا دايمآ في تفكيري وقلبي وروحي وحشتيني يا اللي مشوفتش دقيقة حلوة في بعدك عني مشيتي وخدتي كل حاجة حلوة معاكي خدتي قلبي وعقلي وروحي بس انا بحبكك وهفضل احبكك لآخر ثانيه في عمري ولو فاضل في عمري دقيقة هعيشها ليكي ي روح قلبي من جوه.<br>
+            <center><strong style="color: var(--main-purple);">توتاا قلبي 🌝❤️</strong></center>
+        </div>
 
         <div class="counter-section">
-            <p style="font-size: 1.1rem; color: #e0e0e0;">بقالي معاكي أجمل:</p>
+            <p style="color: #b3b3b3; margin-bottom: 10px;">بقالي معاكي أجمل:</p>
             <div class="counter-grid">
                 <div class="counter-box"><span id="years">0</span><p>سنين</p></div>
                 <div class="counter-box"><span id="months">0</span><p>شهور</p></div>
@@ -81,12 +163,6 @@
             <div class="photo-frame"><img src="/1.jpg"></div>
             <p class="photo-caption">روح قلبي وعقلي آش آش ❤️</p>
         </div>
-
-        <button class="letter-btn" id="openLetter">عندي ليكي رسالة سرية ✉️</button>
-        <div id="letter" class="letter-content">
-            "يا أشرقت، مفيش كلام يوصف حبي ليكي.. انتي أجمل حاجة حصلت في حياتي، وبدعي ربنا نفضل سوا لآخر العمر. بحبك يا بطوطتي ❤️"
-        </div>
-
         <div class="photo-entry">
             <div class="photo-frame"><img src="/2.jpg"></div>
             <p class="photo-caption">بحبكك يا قلب عبده 😍</p>
@@ -97,33 +173,22 @@
         </div>
         <div class="photo-entry">
             <div class="photo-frame"><img src="/4.jpg"></div>
-            <p class="photo-caption">
-                أشرقت يعني قلبي وروحي وعقلي يعني حياتي اللي ملهاش طعم غير بيها ومتكملش غير بيها.. <br><br>
-                لو رجع بيا الزمن الف مرة هختارك انتي في كل مرة.. بحبك ❤️
-            </p>
-        </div>
-
-        <div class="video-container">
-            <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <p class="photo-caption">لو رجع بيا الزمن ألف مرة هختارك إنتي ❤️</p>
         </div>
     </div>
 
     <script is:inline>
-        const messages = ["بحب ضحكتك ❤️", "انتي ملكة قلبي", "يا وش الخير عليا", "مقدرش أعيش من غيرك", "انتي الدنيا وما فيها"];
-
-        // نجوم الخلفية
-        const canvas = document.getElementById('stars-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const stars = Array(100).fill().map(() => ({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2, speed: Math.random() * 0.5 }));
-        function drawStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2); ctx.fill(); s.y += s.speed; if (s.y > canvas.height) s.y = 0; });
-            requestAnimationFrame(drawStars);
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
         }
-        drawStars();
+        setInterval(createHeart, 300);
 
         function updateCounter() {
             const startDate = new Date("2021-11-15T00:00:00");
@@ -137,33 +202,22 @@
             document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }
 
-        document.getElementById('happyBtn').onclick = (e) => {
-            document.getElementById('love-message').innerText = messages[Math.floor(Math.random() * messages.length)];
-            for(let i=0; i<5; i++) {
-                const h = document.createElement('div'); h.className = 'heart-fly'; h.innerHTML = '❤️';
-                h.style.left = e.clientX + (Math.random()*40-20) + 'px'; h.style.top = e.clientY + 'px';
-                document.body.appendChild(h); setTimeout(() => h.remove(), 1000);
-            }
-        };
-
-        document.getElementById('openLetter').onclick = function() {
-            document.getElementById('letter').style.display = 'block';
-            this.style.display = 'none';
-        };
-
-        function checkPassword() {
-            const input = document.getElementById('passInput');
-            if (input && input.value === "15112021") {
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const pass = document.getElementById('passInput').value.trim();
+            if (pass === "15112021") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 document.body.style.alignItems = 'flex-start';
-                document.getElementById('videoFrame').src = "https://www.youtube.com/embed/n7Tmcj8E6qQ?autoplay=1";
-                window.scrollTo(0, 0);
+                
+                // تشغيل الأغنية المطلوبة تلقائياً
+                const iframe = document.getElementById('youtube-audio');
+                iframe.src += "&autoplay=1";
+
                 setInterval(updateCounter, 1000);
                 updateCounter();
+                window.scrollTo(0, 0);
             } else { alert("الباسورد غلط يا روحي 😉"); }
-        }
-        document.getElementById('submitBtn')?.addEventListener('click', checkPassword);
+        });
     </script>
 </body>
 </html>
