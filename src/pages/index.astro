@@ -5,119 +5,66 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>إلى أشرقت ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --main-purple: #ff00ff; 
-            --dark-bg: #0d0221; 
-            --card-bg: #1a1a2e; 
+            --dark-bg: #000000; 
+            --card-bg: #0a0a0a; 
         }
         
-        body { 
+        /* منع الحركة الجانبية تماماً */
+        html, body { 
             background-color: var(--dark-bg); 
             color: white; 
             font-family: 'Cairo', sans-serif; 
             margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* أهم سطر لمنع الشاشة تروح يمين وشمال */
             position: relative;
         }
 
+        body {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+
         #login-screen { 
-            text-align: center; 
-            width: 85%; 
-            max-width: 380px; 
-            background: rgba(26, 26, 46, 0.95); 
-            backdrop-filter: blur(15px);
-            padding: 40px 25px; 
-            border-radius: 35px; 
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.2); 
-            border: 1px solid rgba(255, 0, 255, 0.3);
-            z-index: 100;
+            text-align: center; width: 85%; max-width: 380px; 
+            background: rgba(15, 15, 15, 0.98); backdrop-filter: blur(15px);
+            padding: 40px 25px; border-radius: 35px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100; position: relative;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
         }
 
-        #main-content {
-            display: none;
-            width: 90%;
-            max-width: 550px;
-            text-align: center;
-            z-index: 10;
-            padding: 40px 0;
-        }
+        #main-content { display: none; width: 90%; max-width: 550px; text-align: center; z-index: 10; padding: 40px 0; }
 
-        .love-letter {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 25px;
-            border: 1px solid var(--main-purple);
-            margin-bottom: 30px;
-            line-height: 1.8;
-            text-align: right;
-        }
+        .love-letter { background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 30px; line-height: 1.8; text-align: right; }
 
-        .counter-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 12px; 
-            direction: ltr; 
-            margin-bottom: 40px;
-        }
-        .counter-box { 
-            background: var(--card-bg); 
-            padding: 12px 5px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(255, 0, 255, 0.2);
-        }
-        .counter-box span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--main-purple); }
-        .counter-box p { margin: 2px 0 0; font-size: 0.75rem; color: #b3b3b3; }
+        .counter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; direction: ltr; margin-bottom: 40px; }
+        .counter-box { background: var(--card-bg); padding: 12px 5px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .counter-box span { display: block; font-size: 1.4rem; font-weight: bold; color: white; }
+        .counter-box p { margin: 2px 0 0; font-size: 0.75rem; color: #888; }
 
-        .photo-entry {
-            margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 0, 255, 0.1);
-        }
-        .photo-frame {
-            width: 100%; border-radius: 20px; overflow: hidden; 
-            border: 2px solid var(--main-purple); box-shadow: 0 0 15px var(--main-purple);
-        }
+        .photo-entry { margin-bottom: 40px; background: rgba(255, 255, 255, 0.02); padding: 15px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .photo-frame { width: 100%; border-radius: 20px; overflow: hidden; border: 1px solid #333; }
         .photo-frame img { width: 100%; display: block; }
-        .photo-caption { margin-top: 15px; font-size: 1.2rem; font-weight: bold; }
 
-        .input-box { 
-            width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 50px; 
-            border: 2px solid var(--main-purple); background: transparent; 
-            color: #fff; text-align: center; outline: none; box-sizing: border-box;
-            font-size: 1.2rem;
-        }
+        .input-box { width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 50px; border: 1px solid #444; background: transparent; color: #fff; text-align: center; outline: none; box-sizing: border-box; font-size: 1.1rem; }
+        .login-btn { width: 100%; padding: 15px; border-radius: 50px; border: none; background: white; color: black; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
 
-        .login-btn { 
-            width: 100%; padding: 15px; border-radius: 50px; border: none; 
-            background: linear-gradient(45deg, #ff00ff, #8a2be2); 
-            color: #fff; font-weight: bold; cursor: pointer; font-size: 1.1rem;
-        }
-
-        /* ستايل القلوب المتساقطة مثل الثلج */
-        .falling-heart {
-            position: fixed;
-            top: -20px;
-            font-size: 15px;
-            color: rgba(255, 0, 255, 0.8);
-            user-select: none;
-            z-index: 1;
-            pointer-events: none;
-            animation: snowFall linear forwards;
-        }
-
-        @keyframes snowFall {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(105vh) translateX(20px) rotate(360deg); opacity: 0; }
+        /* الأنيميشن الثابت للقلوب */
+        @keyframes heartFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         #music-player { position: absolute; width: 0; height: 0; overflow: hidden; }
@@ -128,7 +75,7 @@
     <div id="login-screen">
         <h1>وحشتيني يا نور عيني ❤️</h1>
         <p>اكتبي تاريخنا يلا 😉💞</p>
-        <input type="password" id="passInput" class="input-box" placeholder="تاريخ اليوم">
+        <input type="password" id="passInput" class="input-box" placeholder="اكتب تاريخنا ي روح قلبي">
         <button id="submitBtn" class="login-btn">ادخلي لقلبي 🔓</button>
     </div>
 
@@ -136,13 +83,11 @@
         <div id="music-player">
             <iframe id="youtube-audio" src="https://www.youtube.com/embed/XRUNVFhmD0o?enablejsapi=1&loop=1&playlist=XRUNVFhmD0o" allow="autoplay"></iframe>
         </div>
-
         <div class="love-letter">
             وحشتيني ي آش آش ❤️<br>
             وحشني صوتك وكلامك وضحكتك وهزارك حتي خناقك وحشني وحشتني كل حاجة فيكي عدا وقت كتير وكبير واحنا مش مع بعض بس انتي معايا دايمآ في تفكيري وقلبي وروحي وحشتيني يا اللي مشوفتش دقيقة حلوة في بعدك عني مشيتي وخدتي كل حاجة حلوة معاكي خدتي قلبي وعقلي وروحي بس انا بحبكك وهفضل احبكك لآخر ثانيه في عمري ولو فاضل في عمري دقيقة هعيشها ليكي ي روح قلبي من جوه.<br>
-            <center><strong style="color: var(--main-purple);">توتاا قلبي 🌝❤️</strong></center>
+            <center><strong>توتاا قلبي 🌝❤️</strong></center>
         </div>
-
         <div class="counter-grid">
             <div class="counter-box"><span id="years">0</span><p>سنين</p></div>
             <div class="counter-box"><span id="months">0</span><p>شهور</p></div>
@@ -151,27 +96,30 @@
             <div class="counter-box"><span id="minutes">0</span><p>دقائق</p></div>
             <div class="counter-box"><span id="seconds">0</span><p>ثواني</p></div>
         </div>
-
-        <div class="photo-entry"><div class="photo-frame"><img src="/1.jpg"></div><p class="photo-caption">روح قلبي وعقلي آش آش ❤️</p></div>
-        <div class="photo-entry"><div class="photo-frame"><img src="/2.jpg"></div><p class="photo-caption">بحبكك يا قلب عبده 😍</p></div>
-        <div class="photo-entry"><div class="photo-frame"><img src="/3.jpg"></div><p class="photo-caption">بعشق امكك 😉💜</p></div>
-        <div class="photo-entry"><div class="photo-frame"><img src="/4.jpg"></div><p class="photo-caption">لو رجع بيا الزمن ألف مرة هختارك إنتي ❤️</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/1.jpg"></div><p>روح قلبي وعقلي آش آش ❤️</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/2.jpg"></div><p>بحبكك يا قلب عبده 😍</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/3.jpg"></div><p>بعشق امكك 😉💜</p></div>
+        <div class="photo-entry"><div class="photo-frame"><img src="/4.jpg"></div><p>لو رجع بيا الزمن ألف مرة هختارك إنتي ❤️</p></div>
     </div>
 
     <script is:inline>
-        // دالة إنشاء القلوب بتساقط هادئ
         function createHeart() {
             const heart = document.createElement('div');
-            heart.className = 'falling-heart';
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 4 + 4) + 's'; // سرعة أبطأ كالثلج
-            heart.style.opacity = Math.random() * 0.5 + 0.5;
-            heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            heart.style.position = 'fixed';
+            heart.style.top = '-10vh';
+            heart.style.left = Math.random() * 95 + 'vw'; /* قللنا النسبة لـ 95 عشان ميخرجش برا الشاشة */
+            heart.style.color = 'white';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.zIndex = '1';
+            heart.style.pointerEvents = 'none';
+            heart.style.animation = `heartFall ${(Math.random() * 3 + 5)}s linear forwards`;
+            
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 8000);
         }
-        setInterval(createHeart, 400);
+
+        setInterval(createHeart, 500);
 
         function updateCounter() {
             const startDate = new Date("2021-11-15T00:00:00");
@@ -190,17 +138,13 @@
             if (pass === "15112021") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                document.body.style.alignItems = 'flex-start';
-                
+                document.body.style.display = 'block'; /* تغيير الـ flex عشان التمرير يشتغل صح */
                 const iframe = document.getElementById('youtube-audio');
                 iframe.src += "&autoplay=1";
-
                 setInterval(updateCounter, 1000);
                 updateCounter();
                 window.scrollTo(0, 0);
-            } else { 
-                alert("الباسورد غلط يا روحي 😉"); 
-            }
+            } else { alert("الباسورد غلط يا روحي 😉"); }
         });
     </script>
 </body>
